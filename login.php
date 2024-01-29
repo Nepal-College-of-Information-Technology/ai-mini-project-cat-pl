@@ -21,6 +21,8 @@
           <button class="toggle-button loginbutton">Login</button>
           <button class="toggleMove">Signup</button>
         </div>
+
+        <!-- SIGNUP PAGE -->
         <div class="signup-form">
           <form action="#" class="form signupp signupform" method="post">
             <div class="input">
@@ -48,32 +50,7 @@
                 style="color: red; font-size: medium"
               ></span>
             </div>
-            <div class="input">
-              <input
-                type="text"
-                name="phone"
-                id="phone"
-                placeholder="Phone Number"
-                autocomplete="off"
-                required
-              /><span
-                id="phone-error-area"
-                style="color: red; font-size: medium"
-              ></span>
-            </div>
-            <div class="input">
-              <input
-                type="text"
-                name="address"
-                id="address"
-                placeholder="Address"
-                autocomplete="off"
-                required
-              /><span
-                id="address-error-area"
-                style="color: red; font-size: medium"
-              ></span>
-            </div>
+
             <div class="input">
               <input
                 type="password"
@@ -101,18 +78,10 @@
               ></span>
             </div>
 
-            <div class="terms-conditions">
-              <p>
-                <input
-                  type="checkbox"
-                  name="terms-conditions"
-                  id="terms-conditions"
-                  checked
-                />I agree to the <a href="#">Terms &amp; Conditions</a>.
-              </p>
-            </div>
             <div class="submit-button-wrap">
-              <button class="submit-button" type="submit">Signup</button>
+              <button class="submit-button" type="submit" name="signup">
+                Signup
+              </button>
             </div>
           </form>
 
@@ -139,11 +108,10 @@
                 required
               />
             </div>
-            <div class="forgot-password">
-              <a href="/">Forgot Password ?</a>
-            </div>
             <div class="submit-button-wrap">
-              <button class="submit-button" type="submit">Login</button>
+              <button class="submit-button" type="submit" name="login">
+                Login
+              </button>
             </div>
           </form>
         </div>
