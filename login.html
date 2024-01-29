@@ -1,44 +1,360 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>cat.pl</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,600;1,300&display=swap");
+      body {
+        background-color: rgb(250, 250, 250);
+      }
+      .box {
+        margin-top: 20px;
+        width: 100%;
+        height: 100%;
+        background-color: rgb(255, 255, 255);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 100px;
+      }
+
+      .inside-box {
+        width: 80%;
+        min-height: 90%;
+        background-color: rgb(255, 255, 255);
+        border-radius: 10px;
+        box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .toggle-buttons {
+        width: 80%;
+        background-color: rgb(255, 255, 255);
+        margin: 2em;
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        border-radius: 50px;
+        box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
+      }
+
+      .toggleMove {
+        position: absolute;
+        width: 50%;
+        height: 90%;
+        margin: 2px;
+        border: none;
+        outline: none;
+        border-radius: 50px;
+        background-color: #000000;
+        color: white;
+        font-size: 00.8em;
+        font-weight: 600;
+        transform: translateX(0%);
+        transition: all 0.3s ease-in-out;
+      }
+
+      .toggle-button {
+        padding: 1em;
+        width: 50%;
+        outline: none;
+        border: none;
+        background-color: transparent;
+        border-radius: 50px;
+        color: rgb(0, 0, 0);
+        font-size: 0.8em;
+        font-weight: 600;
+        cursor: pointer;
+        box-shadow: rgba(255, 255, 255, 0.1) 0px 4px 12px;
+      }
+
+      .toggleMoveRight {
+        transform: translateX(98%);
+        transition: all 0.3s ease-in-out;
+      }
+
+      .form {
+        display: none;
+      }
+
+      .signupform {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .input {
+        width: 500px;
+        margin: 0.8em 0;
+        background-color: transparent;
+        border-radius: 50px;
+        box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px,
+          rgba(0, 0, 0, 0.24) 0px 1px 2px;
+        font-weight: 500;
+        color: white;
+      }
+
+      .input input {
+        color: rgb(0, 0, 0);
+        outline: none;
+        padding: 1em 1.5em;
+        background-color: transparent;
+        border: none;
+        border-bottom: 1.5px solid white;
+        transition: all 0.6s ease-in-out;
+        transform-origin: bottom right;
+        font-size: 1em;
+      }
+
+      .input input:focus {
+        transition: all 0.6s ease-in-out;
+        transform-origin: bottom left;
+        outline: none;
+      }
+
+      .forgot-password {
+        text-align: center;
+      }
+
+      .forgot-password a {
+        text-decoration: none;
+        color: #5e5c5c;
+        font-size: 0.8em;
+      }
+
+      .submit-button-wrap {
+        display: flex;
+        justify-content: center;
+      }
+
+      .terms-conditions {
+        color: rgb(0, 0, 0);
+      }
+
+      .terms-conditions a {
+        text-decoration: none;
+        color: #757575;
+      }
+
+      .submit-button {
+        width: 150px;
+        padding: 1em;
+        margin: 2em 0;
+        border-radius: 50px;
+        border: none;
+        outline: none;
+        background-color: #000000;
+        box-shadow: rgba(255, 255, 255, 0.12) 0px 1px 3px,
+          rgba(255, 255, 255, 0.24) 0px 1px 2px;
+        color: white;
+        font-size: 0.8em;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s ease-in-out;
+      }
+
+      .submit-button:hover {
+        background-color: white;
+        color: black;
+        transition: all 0.3s ease-in-out;
+      }
+      .loginform {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      @media screen and (max-width: 600px) {
+        .toggleMove {
+          width: 50%;
+        }
+        .toggle-button {
+          width: 50%;
+        }
+        .input {
+          width: 100%;
+        }
+        .submit-button {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
     <!-- start of nav bar -->
     <div class="navbar">
-        <a href="#">
-            Cat.pl
-        </a>
+      <a href="#"> Cat.pl </a>
     </div>
     <!-- end of nav bar -->
 
-    <!-- start of login -->
-    <div class="registration-container">
-        <form class="registration-form">
-            <div id="SignUpButton">
-                <button type="button" id="signupButton">SIGNUP</button>
-                <button type="button" id="loginButton">LOGIN</button>
-             </div>
-            <div class="form-group">
-                <input type="text" id="Name" name="Name" placeholder="Name" required>
+    <div class="box">
+      <div class="inside-box">
+        <div class="toggle-buttons">
+          <button class="toggle-button signupbutton">Signup</button>
+          <button class="toggle-button loginbutton">Login</button>
+          <button class="toggleMove">Signup</button>
+        </div>
+        <div class="signup-form">
+          <form action="#" class="form signupp signupform" method="post">
+            <div class="input">
+              <input
+                type="text"
+                name="fullname"
+                id="full-name"
+                placeholder="Full Name"
+                autocomplete="off"
+                required
+              /><span
+                id="name-error-area"
+                style="color: red; font-size: medium"
+              ></span>
             </div>
-            <div class="form-group">
-                <input type="email" id="email" name="email" placeholder="Email" required>
+            <div class="input">
+              <input
+                type="email"
+                name="email"
+                id="email"
+                placeholder="Email"
+                required
+              /><span
+                id="email-error-area"
+                style="color: red; font-size: medium"
+              ></span>
             </div>
-            <div class="form-group">
-                <input type="password" id="password" name="password" placeholder="Password" required>
+            <div class="input">
+              <input
+                type="text"
+                name="phone"
+                id="phone"
+                placeholder="Phone Number"
+                autocomplete="off"
+                required
+              /><span
+                id="phone-error-area"
+                style="color: red; font-size: medium"
+              ></span>
             </div>
-            <div class="form-group">
-                <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm Password" required>
+            <div class="input">
+              <input
+                type="text"
+                name="address"
+                id="address"
+                placeholder="Address"
+                autocomplete="off"
+                required
+              /><span
+                id="address-error-area"
+                style="color: red; font-size: medium"
+              ></span>
             </div>
-            <div class="form-group">
-                <button type="submit">SINGUP</button>
+            <div class="input">
+              <input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="New password"
+                autocomplete="off"
+                required
+              /><span
+                id="password-error-area"
+                style="color: red; font-size: medium"
+              ></span>
             </div>
-        </form>
+            <div class="input">
+              <input
+                type="password"
+                name="confirmpass"
+                id="confirm-pass"
+                placeholder="Confirm password"
+                autocomplete="off"
+                required
+              /><span
+                id="confirm_password-error-area"
+                style="color: red; font-size: medium"
+              ></span>
+            </div>
+
+            <div class="terms-conditions">
+              <p>
+                <input
+                  type="checkbox"
+                  name="terms-conditions"
+                  id="terms-conditions"
+                  checked
+                />I agree to the <a href="#">Terms &amp; Conditions</a>.
+              </p>
+            </div>
+            <div class="submit-button-wrap">
+              <button class="submit-button" type="submit">Signup</button>
+            </div>
+          </form>
+
+          <!-- SIGNIN PAGE -->
+
+          <form action="" class="form loginn">
+            <div class="input">
+              <input
+                type="email"
+                name="email"
+                id="login-email"
+                placeholder="Email"
+                autocomplete="off"
+                required
+              />
+            </div>
+            <div class="input">
+              <input
+                type="password"
+                name="password"
+                id="login-password"
+                placeholder="Password"
+                autocomplete="off"
+                required
+              />
+            </div>
+            <div class="forgot-password">
+              <a href="/">Forgot Password ?</a>
+            </div>
+            <div class="submit-button-wrap">
+              <button class="submit-button" type="submit">Login</button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
-    <!-- end of login -->
-</body>
+
+    <script>
+      const signupbutton = document.querySelector(".signupbutton");
+      const loginbutton = document.querySelector(".loginbutton");
+      const toggleMove = document.querySelector(".toggleMove");
+      const signupp = document.querySelector(".signupp");
+      const loginn = document.querySelector(".loginn");
+
+      loginbutton.addEventListener("click", () => {
+        toggleMove.classList.add("toggleMoveRight");
+        loginn.classList.add("loginform");
+        signupp.classList.remove("signupform");
+        toggleMove.innerHTML = "Login";
+      });
+
+      signupbutton.addEventListener("click", () => {
+        toggleMove.classList.remove("toggleMoveRight");
+        loginn.classList.remove("loginform");
+        signupp.classList.add("signupform");
+        toggleMove.innerHTML = "Signup";
+      });
+
+      function chooseportal(event) {
+        document.getElementById("login-block-wrapper").style.display = "flex";
+      }
+      function exitlogin(evt) {
+        document.getElementById("login-block-wrapper").style.display = "none";
+      }
+    </script>
+  </body>
 </html>
