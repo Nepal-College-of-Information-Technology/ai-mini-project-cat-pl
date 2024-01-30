@@ -12,4 +12,15 @@ else:
     sys.exit(1)
 result = test.get_sentiment(text)
 
-print(return_result(result))
+# parse result to float
+
+result = float(result)
+
+if result > 0.5:
+    print("positive")
+elif result < -0.5:
+    print("negative")
+else:
+    print("neutral")
+
+print(result)
