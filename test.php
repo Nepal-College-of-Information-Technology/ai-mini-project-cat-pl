@@ -1,8 +1,9 @@
 <?php
 
-    $text = 'I am a very bad man'.
+$text = 'I am a bad man';
 
-    $var = shell_exec("python3 backend/score.py '.$text'");
-    
-    echo $var;
+
+$var = shell_exec('python3 score.py ' . $text);
+
+echo $var;
 ?>
