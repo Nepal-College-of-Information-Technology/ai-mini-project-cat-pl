@@ -39,7 +39,8 @@ class Connection
 
     public function signup($name, $email, $password)
     {
-        try {
+        try{
+            $password = hash('sha256', $password);
             $sql = "INSERT INTO users (name, email, password) VALUES (:name, :email, :password)";
             $stmt = $this->pdo->prepare($sql);
             $stmt->bindParam(':name', $name);
@@ -47,7 +48,8 @@ class Connection
             $stmt->bindParam(':password', $password);
             $stmt->execute();
             return true;
-        } catch (PDOException $e) {
+        }
+        catch(PDOException $e){
             die("ERROR: Could not able to execute $sql. " . $e->getMessage());
         }
     }
@@ -67,3 +69,5 @@ class Connection
         }
     }
 }
+
+Connection::users();
