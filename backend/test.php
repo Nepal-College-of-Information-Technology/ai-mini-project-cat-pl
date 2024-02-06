@@ -2,11 +2,18 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-$text = 'I am a man';
+$text = "I am a very good man";
 
-$var = shell_exec("/opt/lampp/htdocs/ai-mini-project-cat-pl/venv/bin/python /opt/lampp/htdocs/ai-mini-project-cat-pl/backend/score.py '$text'");
+ 
+shell_exec("/opt/lampp/htdocs/ai-mini-project-cat-pl/venv/bin/python /opt/lampp/htdocs/ai-mini-project-cat-pl/backend/main.py '$text' > /opt/lampp/htdocs/ai-mini-project-cat-pl/backend/output.txt 2>&1");
 
-echo $var;
+
+// read file output.txt
+
+$myfile = fopen("/opt/lampp/htdocs/ai-mini-project-cat-pl/backend/output.txt", "r") or die("Unable to open file!");
+$var = fread($myfile,filesize("/opt/lampp/htdocs/ai-mini-project-cat-pl/backend/output.txt"));
+fclose($myfile);
+
 
 $result = $var;
 ?>
@@ -15,12 +22,14 @@ $result = $var;
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" c initial-scale=1.0>
     <title>Document</title>
 </head>
 <body>
-    <h1 id="result">
-        <?php echo $result; ?>
-    </h1>
+
+    <h1>Result</h1>
+    <p><?php echo $result; ?></p>
+    
+    
 </body>
 </html>
