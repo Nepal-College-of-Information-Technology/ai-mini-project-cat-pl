@@ -1,4 +1,2 @@
-nltk
 textblob
-newspaper3k
 emoji

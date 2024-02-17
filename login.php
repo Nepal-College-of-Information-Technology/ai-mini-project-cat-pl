@@ -4,6 +4,24 @@ session_start();
 
 
 
+if (isset($_POST['signup'])) {
+    $fullname = $_POST['fullname'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $confirmpass = $_POST['confirmpass'];
+
+    include_once 'Database/connection.php';
+
+    if ($password == $confirmpass) {
+        $conn = new Connection();
+        $connection = $conn->signup($fullname, $email, $password);
+    } else {
+        echo "Password does not match";
+    }
+}
+
+
+
 
 ?>
 
