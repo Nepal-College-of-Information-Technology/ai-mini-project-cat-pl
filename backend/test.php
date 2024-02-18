@@ -5,7 +5,7 @@ ini_set('display_errors', 1);
 $text = "I am a bad coder.";
 
  
-$result = shell_exec("/opt/lampp/htdocs/ai-mini-project-cat-pl/venv/bin/python /opt/lampp/htdocs/ai-mini-project-cat-pl/backend/main.py '$text'");
+$result = shell_exec("python main.py '$text'");
 echo $result;
 ?>
 
