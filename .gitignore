@@ -1,4 +1,4 @@
-# add myenv to gitignore
+# add gitignore
 
 venv
 backend/__pycache__
