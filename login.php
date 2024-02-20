@@ -21,6 +21,28 @@ if (isset($_POST['signup'])) {
 }
 
 
+/*
+if (isset($_POST['login'])) {
+  // Handle login logic
+  $email = $_POST['email'];
+  $password = $_POST['password'];
+
+  $conn = new Connection();
+  $user = $conn->login($email, $password);
+
+  if ($user) {
+      // Login successful, set session variables or perform other actions
+      $_SESSION['user_id'] = $user['id'];
+      $_SESSION['user_email'] = $user['email'];
+      // Redirect to a dashboard or another page after successful login
+      header("Location: dashboard.php");
+      exit();
+  } else {
+      echo "Invalid email or password";
+  }
+}
+*/
+
 
 
 ?>

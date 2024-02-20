@@ -20,17 +20,20 @@ class Connection
         $this->pdo = null;
     }
 
-    public function users()
+    public static function users()
     {
         try {
+            $pdo = new PDO("mysql:host=localhost;dbname=aiproject;charset=utf8mb4", "root", "");
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
             $sql = "CREATE TABLE IF NOT EXISTS users (
                 id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
                 name VARCHAR(30) NOT NULL,
                 email VARCHAR(50) NOT NULL,
                 password VARCHAR(50) NOT NULL,
                 reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-                )";
-            $this->pdo->exec($sql);
+            )";
+            $pdo->exec($sql);
             // echo "Table users created successfully";
         } catch (PDOException $e) {
             die("ERROR: Could not able to execute $sql. " . $e->getMessage());
@@ -39,7 +42,7 @@ class Connection
 
     public function signup($name, $email, $password)
     {
-        try{
+        try {
             $password = hash('sha256', $password);
             $sql = "INSERT INTO users (name, email, password) VALUES (:name, :email, :password)";
             $stmt = $this->pdo->prepare($sql);
@@ -48,8 +51,7 @@ class Connection
             $stmt->bindParam(':password', $password);
             $stmt->execute();
             return true;
-        }
-        catch(PDOException $e){
+        } catch (PDOException $e) {
             die("ERROR: Could not able to execute $sql. " . $e->getMessage());
         }
     }
@@ -70,4 +72,5 @@ class Connection
     }
 }
 
+// Call the static method
 Connection::users();
