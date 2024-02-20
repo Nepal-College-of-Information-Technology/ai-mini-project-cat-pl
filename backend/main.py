@@ -1,12 +1,11 @@
-import sys
-import emoji
+from fastapi import FastAPI
+from pydantic import BaseModel
 from textblob import TextBlob
 
-if len(sys.argv) > 1:
-    text = sys.argv[1]
-else:
-    print("No text argument provided. Exiting.")
-    sys.exit(1)
+app = FastAPI()
+
+class SentimentRequest(BaseModel):
+    text: str
 
 def get_sentiment(text):
     blob = TextBlob(text)
@@ -14,16 +13,12 @@ def get_sentiment(text):
     sentiment = round(sentiment, 2)
     return sentiment
 
-# parse result to float
-result = get_sentiment(text)
+@app.post("/sentiment/")
+async def analyze_sentiment(request: SentimentRequest):
+    text = request.text
+    result = get_sentiment(text)
+    return {"sentiment_score": result}
 
-if result > 0.3:
-    print(result,"  :  very positive words !",emoji.emojize(':grinning_face_with_big_eyes:'))
-elif result > 0.1:
-    print(result,"  :  positive words !",emoji.emojize(':smiling_face_with_smiling_eyes:'))
-elif result < -0.3:
-    print(result,"  :  very negative words !",emoji.emojize(':worried_face:'))
-elif result < -0.1:
-    print(result,"  :  negative words !",emoji.emojize(':pensive_face:'))
-else:
-    print(result,"  :  neutral words !", emoji.emojize(':neutral_face:'))
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
