@@ -18,30 +18,33 @@ if (isset($_POST['signup'])) {
     } else {
         echo "Password does not match";
     }
+
+    if ($connection) {
+        $_SESSION['email'] = $email;
+        header('Location: index.php');
+    } else {
+        echo "Error";
+    }
 }
 
 
-/*
+// Login code
+
 if (isset($_POST['login'])) {
-  // Handle login logic
-  $email = $_POST['email'];
-  $password = $_POST['password'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
 
-  $conn = new Connection();
-  $user = $conn->login($email, $password);
+    include_once 'Database/connection.php';
 
-  if ($user) {
-      // Login successful, set session variables or perform other actions
-      $_SESSION['user_id'] = $user['id'];
-      $_SESSION['user_email'] = $user['email'];
-      // Redirect to a dashboard or another page after successful login
-      header("Location: dashboard.php");
-      exit();
-  } else {
-      echo "Invalid email or password";
-  }
+    $conn = new Connection();
+    $connection = $conn->login($email, $password);
+    if ($connection) {
+        $_SESSION['email'] = $email;
+        header('Location: index.php');
+    } else {
+        echo "Invalid email or password";
+    }
 }
-*/
 
 
 
@@ -59,7 +62,7 @@ if (isset($_POST['login'])) {
   <body>
     <!-- start of nav bar -->
     <div class="navbar">
-      <a href="#"> Cat.pl </a>
+      <a href="#"> Sentiment Analysis </a>
     </div>
     <!-- end of nav bar -->
 
@@ -136,7 +139,7 @@ if (isset($_POST['login'])) {
 
           <!-- SIGNIN PAGE -->
 
-          <form action="" class="form loginn">
+          <form action="" class="form loginn" method="post">
             <div class="input">
               <input
                 type="email"

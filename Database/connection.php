@@ -28,9 +28,9 @@ class Connection
 
             $sql = "CREATE TABLE IF NOT EXISTS users (
                 id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-                name VARCHAR(30) NOT NULL,
-                email VARCHAR(50) NOT NULL,
-                password VARCHAR(50) NOT NULL,
+                name text NOT NULL,
+                email text NOT NULL,
+                password text NOT NULL,
                 reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
             )";
             $pdo->exec($sql);
@@ -58,6 +58,8 @@ class Connection
 
     public function login($email, $password)
     {
+        // hash the password
+        $password = hash('sha256', $password);
         try {
             $sql = "SELECT * FROM users WHERE email = :email AND password = :password";
             $stmt = $this->pdo->prepare($sql);
