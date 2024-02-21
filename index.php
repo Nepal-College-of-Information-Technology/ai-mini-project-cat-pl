@@ -81,7 +81,7 @@ if (isset($_POST['submit'])) {
       </head>
       <body>
         <div class="navbar">
-          <a href="#"> Sentiment  </a>
+          <a href="#"> Sentiment Analysis</a>
         </div>
 
         <div class="body">
