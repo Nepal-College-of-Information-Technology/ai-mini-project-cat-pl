@@ -19,8 +19,7 @@ This project is a sentiment analysis web application that enables users to analy
 
 
 3. **Configure the Database:**
-- Import `database.sql` into your MySQL database to create the required tables.
-- Update the database connection details in `config.php`.
+- Make database named `aiproject` in mysql.
 
 4. **Start the PHP Server:**
 - Deploy PHP scripts to a compatible web server.
